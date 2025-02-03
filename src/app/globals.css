@@ -2,20 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: 'Calibre';
+  src: url('/fonts/Calibre/Calibre-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SFMono';
+  src: url('/fonts/SFMono/SFMono-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@font-face {
+  font-family: 'Calibre';
+  src: url('/fonts/Calibre/Calibre-SemiBold.woff2') format('woff2');
+  font-weight: 700; /* Bold weight */
+  font-style: normal;
+}
+
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  .nav-item {
+    @apply px-4 py-1.5 rounded-full text-sm hover:bg-white/10 hover:text-white transition duration-300;
+  }
 }
