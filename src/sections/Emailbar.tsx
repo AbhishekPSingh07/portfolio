@@ -1,6 +1,6 @@
 export const EmailSection = () => {
     return (
-        <div className="bottom-0 right-0 flex flex-col items-center fixed mr-4 pr-4">
+        <div className="bottom-0 right-0 flex flex-col items-center fixed mr-4 pr-4 z-50">
             <ul className="list-none">
                 <li className="mb-4 p-2">
                     <a

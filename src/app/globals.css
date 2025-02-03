@@ -24,11 +24,271 @@
 
 
 @layer base {
+  body {
+    counter-reset: section;
+  }
+
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  .hero-ring{
+    @apply absolute inset-0 border border-emerald-300/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-[0_0_40px_inset] shadow-emerald-300/5;
+  }
   .nav-item {
     @apply px-4 py-1.5 rounded-full text-sm hover:bg-white/10 hover:text-white transition duration-300;
+  }
+  .numbered-heading {
+    @apply flex relative sm:text-[20px] md:text-[24px] lg:text-[28px] font-bold;
+}
+
+    .numbered-heading {
+      @apply flex items-center font-inter whitespace-nowrap text-[#CCD6F6] text-2xl font-bold;
+    }
+
+    .numbered-heading::before {
+      counter-increment: section;
+      content: '0' counter(section) '.';
+      /* Styling for the number before the heading */
+      @apply text-lg text-[#80FFEA] font-mono mr-3;
+    }
+
+    .numbered-heading::after {
+      content: '';
+      /* Line styling */
+      @apply flex-1 h-[1px] ml-5 bg-[#233554]; 
+    }
+
+    @media (max-width: 480px) {
+      .numbered-heading::before {
+        @apply text-base mr-2;
+      }
+
+      .numbered-heading::after {
+        @apply ml-3 w-[150px];
+      }
+}
+
+}
+
+@layer components {
+  /* Skills list styles */
+  .skills-list {
+    @apply grid grid-cols-2 gap-x-2 p-0 mt-5 overflow-hidden list-none;
+  }
+  .skills-list li {
+    @apply relative mb-2 pl-5 font-mono text-xs;
+  }
+  .skills-list li::before {
+    content: '▹';
+    @apply absolute left-0 text-[#64FFDA] text-sm leading-[12px];
+  }
+
+  /* Overall section container */
+  .about-section {
+    @apply max-w-[900px] mx-auto;
+  }
+
+  /* Responsive grid for text and image */
+  .about-inner {
+    @apply grid grid-cols-1 gap-10; /* Stacked by default for mobile */
+  }
+  @media (min-width: 768px) {
+    .about-inner {
+      /* Medium screens: wider text than image */
+      @apply grid grid-cols-[4fr_2fr] gap-[50px];
+    }
+  }
+  @media (min-width: 1024px) {
+    .about-inner {
+      /* Larger screens: text section becomes even wider */
+      @apply grid grid-cols-[6fr_2fr] gap-[50px];
+    }
+  }
+
+  /* Styled Image Container */
+  .styled-pic {
+    @apply relative max-w-[300px] mx-auto;
+  }
+  @media (max-width: 768px) {
+    .styled-pic {
+      @apply mt-8 w-[70%];
+    }
+  }
+
+  /* Box shadow utility */
+  .box-shadow {
+    box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+    transition: 0.3s ease-in-out;
+  }
+  .box-shadow:hover,
+  .box-shadow:focus-visible {
+    box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
+  }
+
+  /* Wrapper styles for image */
+  .styled-pic .wrapper {
+    @apply block relative w-full rounded bg-[#64FFDA] box-shadow;
+  }
+  .styled-pic .wrapper:hover,
+  .styled-pic .wrapper:focus {
+    @apply outline-0;
+    transform: translate(-4px, -4px);
+  }
+  .styled-pic .wrapper:hover::after,
+  .styled-pic .wrapper:focus::after {
+    transform: translate(8px, 8px);
+  }
+  .styled-pic .wrapper .img {
+    @apply relative rounded transition;
+    mix-blend-mode: multiply;
+    filter: grayscale(100%) contrast(1);
+  }
+  .styled-pic .wrapper:hover .img,
+  .styled-pic .wrapper:focus .img {
+    filter: none;
+    mix-blend-mode: normal;
+  }
+  .styled-pic .wrapper::before,
+  .styled-pic .wrapper::after {
+    content: '';
+    @apply block absolute w-full h-full rounded transition;
+  }
+  .styled-pic .wrapper::before {
+    top: 0;
+    left: 0;
+    background-color: #020c1b; /* navy */
+    mix-blend-mode: screen;
+  }
+  .styled-pic .wrapper::after {
+    border: 2px solid #64FFDA;
+    top: 14px;
+    left: 14px;
+    z-index: -1;
+  }
+
+  .jobsSection {
+    @apply max-w-[700px];
+  }
+  
+  .jobsSectionInner {
+    /* Default mobile style: display block */
+    @apply block;
+  }
+  
+  /* At viewport widths 601px and above, switch display to flex */
+  @media (min-width: 601px) {
+    .jobsSectionInner {
+      @apply flex;
+    }
+  }
+  
+  /* At viewport widths 700px and above, apply a minimum height */
+  @media (min-width: 700px) {
+    .jobsSectionInner {
+      @apply min-h-[340px];
+    }
+  }
+
+  .tab-list {
+    @apply relative z-[3] w-max p-0 m-0 list-none;
+  }
+  @media (max-width: 600px) {
+    .tab-list {
+      @apply flex overflow-x-auto;
+      width: calc(100% + 100px);
+      padding-left: 50px;
+      margin-left: -50px;
+      margin-bottom: 30px;
+    }
+  }
+  @media (max-width: 480px) {
+    .tab-list {
+      width: calc(100% + 50px);
+      padding-left: 25px;
+      margin-left: -25px;
+    }
+  }
+  
+  /* List Item Styles for First and Last Items */
+  .tab-list li:first-of-type {
+    /* Using media queries inside global CSS */
+  }
+  @media (max-width: 600px) {
+    .tab-list li:first-of-type {
+      margin-left: 50px;
+    }
+  }
+  @media (max-width: 480px) {
+    .tab-list li:first-of-type {
+      margin-left: 25px;
+    }
+  }
+  @media (max-width: 600px) {
+    .tab-list li:last-of-type {
+      padding-right: 50px;
+    }
+  }
+  @media (max-width: 480px) {
+    .tab-list li:last-of-type {
+      padding-right: 25px;
+    }
+  }
+  
+  /* Tab Button Styles */
+  .tab-button {
+    @apply flex items-center w-full h-[42px] px-5 pb-[2px] border-l-2 border-solid;
+    border-color: #233554;
+    background-color: transparent;
+    color: #8892b0;
+    font-family: 'SFMono';
+    font-size: var(--fz-xs);
+    text-align: left;
+    white-space: nowrap;
+  }
+  .tab-button span {
+    /* The active state will override this */
+    color: #8892b0;
+  }
+  .tab-button.active span {
+    color: #64FFDA;
+  }
+  .tab-button:hover,
+  .tab-button:focus {
+    background-color: #112240;
+  }
+  
+  @media (max-width: 768px) {
+    .tab-button {
+      @apply px-[15px];
+    }
+  }
+  @media (max-width: 600px) {
+    .tab-button {
+      @apply justify-center min-w-[120px] px-[15px] text-center;
+      border-left: 0;
+      border-bottom: 2px solid #233554;
+    }
+  }
+  
+  /* Highlight Indicator Styles */
+  .tab-highlight {
+    @apply absolute top-0 left-0 z-[10] w-[2px] h-[42px] rounded-[4px] transition-transform duration-200 delay-100;
+    background: var(--green);
+  }
+  @media (max-width: 600px) {
+    .tab-highlight {
+      top: auto;
+      bottom: 0;
+      width: 100%;
+      max-width: 120px;
+      height: 2px;
+      margin-left: 50px;
+    }
+  }
+  @media (max-width: 480px) {
+    .tab-highlight {
+      margin-left: 25px;
+    }
   }
 }
